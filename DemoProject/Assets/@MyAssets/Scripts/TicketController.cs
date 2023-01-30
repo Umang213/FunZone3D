@@ -124,27 +124,26 @@ public class TicketController : MonoBehaviour
                     var Mtask = temp[Helper.RandomInt(0, temp.Count)];
                     Mtask.isEmpty = false;
                     Mtask.storedCustomer = customer;
-                    Mtask.storedCustomer.SetTarget(Mtask.stadingPoint.position, () =>
+                    Mtask.SetTask();
+                    /*Mtask.storedCustomer.SetTarget(Mtask.stadingPoint.position, () =>
                     {
                         Mtask.StartTask();
 
-                    });
+                    });*/
                     customer.isCustomerReady = true;
-                    CodeMonkey.Utils.FunctionTimer.Create(() => moneyStacker.GiveMoney(customer.transform, 10), 0.5f);
+                    CodeMonkey.Utils.FunctionTimer.Create(() => moneyStacker.GiveMoney(customer.transform, 5), 0.5f);
                     CustomerManager.instance.allWaitingCustomers.Remove(customer);
                     //customer = null;
                     _isCustomer = false;
                     _verify = false;
-                    CustomerManager.instance.ArrangePosition();
-                    CustomerManager.instance.instanceSpawing();
+                    CodeMonkey.Utils.FunctionTimer.Create(() =>
+                    {
+                        CustomerManager.instance.ArrangePosition();
+                        CustomerManager.instance.instanceSpawing();
+                    }, 2);
                 });
             }
         }
-
-        /*else
-        {
-            customer.FreeTask();
-        }*/
     }
 
     IEnumerator waiting(Customer customer)

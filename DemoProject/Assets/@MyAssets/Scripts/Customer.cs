@@ -1,12 +1,11 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Customer : MonoBehaviour
 {
-    public Transform emojiPoint;
+    //public Transform emojiPoint;
     public Transform lHandPoint;
     public Transform rHandPoint;
     public BowlingBallTask bowlingBallTask;
@@ -34,30 +33,6 @@ public class Customer : MonoBehaviour
         StartCoroutine(EditUpdate());
     }
 
-    /*IEnumerator Update()
-    {
-        yield return new WaitForSeconds(1);
-        if (_navMeshAgent.enabled == true)
-        {
-            if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
-            {
-                if (_isExit)
-                {
-                    StopAgent();
-                    _customerManager.instanceSpawing();
-                    Destroy(this.gameObject);
-                }
-                else
-                {
-                    StopAgent();
-                    _action?.Invoke();
-                    _action=null;
-                    //StartCoroutine(CheckCustomertask());
-                }
-            }
-        }
-    }*/
-
     IEnumerator EditUpdate()
     {
         yield return new WaitForSeconds(1);
@@ -76,7 +51,6 @@ public class Customer : MonoBehaviour
                     StopAgent();
                     _action?.Invoke();
                     _action = null;
-                    //StartCoroutine(CheckCustomertask());
                 }
             }
         }
@@ -91,11 +65,6 @@ public class Customer : MonoBehaviour
             _anim.SetBool("Idle", true);
             CheckTask();
         });
-        /* _navMeshAgent.enabled = true;
-         _navMeshAgent.SetDestination(point.position);
-         _anim.SetInteger("Task", 2);*/
-        /*_anim.SetBool("Idle", false);
-        _anim.SetBool("Walk", true);*/
     }
 
     public void CheckTask()
@@ -118,7 +87,7 @@ public class Customer : MonoBehaviour
 
     public void ExitCustomer()
     {
-        if (isCustomerReady) _navMeshObstacle.enabled = false;
+        //if (isCustomerReady) _navMeshObstacle.enabled = false; 
         _navMeshAgent.enabled = true;
         _navMeshAgent.SetDestination(_customerManager.customerInstantiatePoint.position);
         _anim.SetBool("Idle", false);
@@ -130,7 +99,7 @@ public class Customer : MonoBehaviour
     {
         _action = endTask;
         _target = target;
-        if (isCustomerReady) _navMeshObstacle.enabled = false;
+        //if (isCustomerReady) _navMeshObstacle.enabled = false;
         _navMeshAgent.enabled = true;
         _navMeshAgent.SetDestination(target);
         _anim.SetBool("Idle", false);
@@ -140,8 +109,7 @@ public class Customer : MonoBehaviour
     public void StopAgent()
     {
         _navMeshAgent.enabled = false;
-        if (isCustomerReady) _navMeshObstacle.enabled = true;
-        //transform.rotation = _target.rotation;
+        //if (isCustomerReady) _navMeshObstacle.enabled = true;
         _anim.SetBool("Walk", false);
         _anim.SetBool("Idle", false);
     }
@@ -156,9 +124,18 @@ public class Customer : MonoBehaviour
         _anim.SetTrigger(key);
     }
 
-    public void ShowEmoji()
+    public void ShowHappyEmoji()
     {
         var par = CustomerManager.instance.happyEmoji[Helper.RandomInt(0, CustomerManager.instance.happyEmoji.Length)];
+        var pos = transform.position;
+        pos.y += 3;
+        var temp = Instantiate(par.gameObject, pos, Quaternion.identity, transform);
+        temp.GetComponent<ParticleSystem>().Play();
+    }
+
+    public void ShowSadEmoji()
+    {
+        var par = CustomerManager.instance.sadEmoji[Helper.RandomInt(0, CustomerManager.instance.sadEmoji.Length)];
         var pos = transform.position;
         pos.y += 3;
         var temp = Instantiate(par.gameObject, pos, Quaternion.identity, transform);

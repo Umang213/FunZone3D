@@ -1,9 +1,14 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DonutCounter : MonoBehaviour
 {
+    public bool isEmpty;
+    public Transform stadingPoint;
+    public MoneyStacker moneyStacker;
+
     public Transform stackPoint;
     public DonutStorage donutStorage;
     public List<Collectables> allDonut;
@@ -11,15 +16,16 @@ public class DonutCounter : MonoBehaviour
     PlayerController playerController;
     bool _isPlayer;
     // Start is called before the first frame update
+
+    public virtual void OnEnable()
+    {
+        TaskControllre.instance.allDonutCounters.Add(this);
+        isEmpty = true;
+    }
+
     void Start()
     {
         donutStorage.CheckDonutStore();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,5 +59,16 @@ public class DonutCounter : MonoBehaviour
                 yield return new WaitForSeconds(0.3f);
             }
         }
+    }
+
+    public Collectables RemoveFromLast(Transform stackTransform)
+    {
+        var temp = allDonut[0];
+        temp.transform.DOJump(stackTransform.position, 2, 1, 0.5f).OnComplete(() =>
+        {
+            temp.transform.SetParent(stackTransform);
+        });
+        allDonut.Remove(temp);
+        return temp;
     }
 }

@@ -18,7 +18,7 @@ public class BouncingTask : Task
     public override void OnEnable()
     {
         base.OnEnable();
-        TaskControllre.instance.allBouncingTasks.Add(this);
+        //TaskControllre.instance.allBouncingTasks.Add(this);
     }
 
     public override void StartTask()
@@ -65,7 +65,7 @@ public class BouncingTask : Task
     public override void OnDisable()
     {
         base.OnDisable();
-        TaskControllre.instance.allBouncingTasks.Remove(this);
+        //TaskControllre.instance.allBouncingTasks.Remove(this);
         if (storedCustomer != null)
         {
             isExit = true;

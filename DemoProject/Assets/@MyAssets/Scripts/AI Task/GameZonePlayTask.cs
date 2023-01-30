@@ -19,7 +19,7 @@ public class GameZonePlayTask : Task
     public override void OnEnable()
     {
         base.OnEnable();
-        TaskControllre.instance.allGameZonePlayTask.Add(this);
+        //TaskControllre.instance.allGameZonePlayTask.Add(this);
     }
 
     public override void StartTask()

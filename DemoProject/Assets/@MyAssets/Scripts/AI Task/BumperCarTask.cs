@@ -9,23 +9,88 @@ public class BumperCarTask : Task
 {
     NavMeshAgent carAgent;
     Vector3 startingPoint;
-
-    //public bool isEmpty;
-    //public Transform stadingPoint;
     public Transform carSitingPoint;
-    //public Customer storedCustomer;
+
     public override void OnEnable()
     {
         base.OnEnable();
         startingPoint = transform.position;
-        TaskControllre.instance.allBumperCarTasks.Add(this);
+        //TaskControllre.instance.allBumperCarTasks.Add(this);
     }
 
     void Start()
     {
         carAgent = GetComponent<NavMeshAgent>();
     }
-    [Button]
+
+    /*public override void SetTask()
+    {
+        var temp = TaskControllre.instance.allDonutCounters.FindAll(x => x.isEmpty == true);
+        if (temp.Count > 0)
+        {
+            var Mtask = temp[Helper.RandomInt(0, temp.Count)];
+            Mtask.isEmpty = false;
+            storedCustomer.SetTarget(Mtask.stadingPoint.position, () =>
+            {
+                //Mtask.StartTask();
+                StartCoroutine(CollectItem(Mtask));
+            });
+        }
+        else
+        {
+            storedCustomer.SetTarget(stadingPoint.position, () =>
+            {
+                StartTask();
+
+            });
+        }
+
+        base.SetTask();
+    }*/
+
+
+    /*IEnumerator CollectItem(DonutCounter donutCounter)
+    {
+        if (donutCounter.allDonut.Count >= 1)
+        {
+            var item = donutCounter.RemoveFromLast(storedCustomer.rHandPoint);
+            yield return new WaitForSeconds(3);
+            donutCounter.moneyStacker.GiveMoney(storedCustomer.transform, 3);
+            Destroy(item.gameObject);
+            donutCounter.isEmpty = true;
+            storedCustomer.SetTarget(stadingPoint.position, () =>
+            {
+                StartTask();
+            });
+        }
+        else
+        {
+            yield return new WaitForSeconds(5);
+            if (donutCounter.allDonut.Count >= 1)
+            {
+                var item = donutCounter.RemoveFromLast(storedCustomer.rHandPoint);
+                yield return new WaitForSeconds(3);
+                donutCounter.moneyStacker.GiveMoney(storedCustomer.transform, 3);
+                Destroy(item.gameObject);
+                donutCounter.isEmpty = true;
+                storedCustomer.SetTarget(stadingPoint.position, () =>
+                {
+                    StartTask();
+                });
+            }
+            else
+            {
+                storedCustomer.ShowSadEmoji();
+                donutCounter.isEmpty = true;
+                storedCustomer.SetTarget(stadingPoint.position, () =>
+                {
+                    StartTask();
+                });
+            }
+
+        }
+    }*/
+
     public override void StartTask()
     {
         StartCoroutine(PlayTask());

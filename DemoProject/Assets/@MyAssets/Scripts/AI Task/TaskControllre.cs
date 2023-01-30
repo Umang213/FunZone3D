@@ -8,13 +8,14 @@ public class TaskControllre : MonoBehaviour
     public static TaskControllre instance;
 
     public List<Task> allTasks;
-    public List<BowlingBallTask> allBowlingBallTask;
-    public List<GameZonePlayTask> allGameZonePlayTask;
-    public List<GameZoneVideoTask> allGameZoneVideoTask;
-    public List<BouncingTask> allBouncingTasks;
-    public List<BouncingSlipingTask> allBouncingSlipingTasks;
-    public List<BumperCarTask> allBumperCarTasks;
-    public List<BouncingLevel4Task> allBouncingLevel4Tasks;
+    public List<DonutCounter> allDonutCounters;
+    //public List<BowlingBallTask> allBowlingBallTask;
+    //public List<GameZonePlayTask> allGameZonePlayTask;
+    //public List<GameZoneVideoTask> allGameZoneVideoTask;
+    //public List<BouncingTask> allBouncingTasks;
+    //public List<BouncingSlipingTask> allBouncingSlipingTasks;
+    //public List<BumperCarTask> allBumperCarTasks;
+    //public List<BouncingLevel4Task> allBouncingLevel4Tasks;
 
     public GameObject moneyStack;
     public Transform moneyStackPosition;

@@ -179,17 +179,26 @@ public class PlayerController : MonoBehaviour
 
     public void AddToStack(Collectables collectable)
     {
-        collectable.transform.DOJump(stackPoint.position, 2, 1, 0.5f);
-        collectable.transform.SetParent(stackPoint);
+        collectable.transform.DOJump(stackPoint.position, 2, 1, 0.5f).OnComplete(() =>
+        {
+            collectable.transform.SetParent(stackPoint);
+        });
         allStackItems.Add(collectable);
+        _anim.SetLayerWeight(1, 1);
     }
 
     public Collectables RemoveFromLast(Collectables collectables, Transform stackTransform)
     {
         var temp = allStackItems.Find(x => x.tag == collectables.tag);
-        temp.transform.DOJump(stackTransform.position, 2, 1, 0.5f);
-        temp.transform.SetParent(stackTransform);
+        temp.transform.DOJump(stackTransform.position, 2, 1, 0.5f).OnComplete(() =>
+        {
+            temp.transform.SetParent(stackTransform);
+        });
         allStackItems.Remove(temp);
+        if (allStackItems.Count == 0)
+        {
+            _anim.SetLayerWeight(1, 0);
+        }
         return temp;
     }
     #endregion

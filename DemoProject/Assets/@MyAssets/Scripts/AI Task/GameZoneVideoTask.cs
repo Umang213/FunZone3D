@@ -21,7 +21,7 @@ public class GameZoneVideoTask : Task
     public override void OnEnable()
     {
         base.OnEnable();
-        TaskControllre.instance.allGameZoneVideoTask.Add(this);
+        //TaskControllre.instance.allGameZoneVideoTask.Add(this);
     }
 
     public override void StartTask()

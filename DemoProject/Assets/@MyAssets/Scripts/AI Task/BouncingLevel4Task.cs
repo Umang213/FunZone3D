@@ -28,7 +28,7 @@ public class BouncingLevel4Task : Task
     public override void OnEnable()
     {
         base.OnEnable();
-        TaskControllre.instance.allBouncingLevel4Tasks.Add(this);
+        //TaskControllre.instance.allBouncingLevel4Tasks.Add(this);
     }
     public override void StartTask()
     {
@@ -130,7 +130,7 @@ public class BouncingLevel4Task : Task
     public override void OnDisable()
     {
         base.OnDisable();
-        TaskControllre.instance.allBouncingLevel4Tasks.Remove(this);
+        //TaskControllre.instance.allBouncingLevel4Tasks.Remove(this);
         EndTask();
     }
 }

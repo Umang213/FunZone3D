@@ -20,7 +20,7 @@ public class BouncingSlipingTask : Task
     public override void OnEnable()
     {
         base.OnEnable();
-        TaskControllre.instance.allBouncingSlipingTasks.Add(this);
+        //TaskControllre.instance.allBouncingSlipingTasks.Add(this);
     }
 
     public override void StartTask()
@@ -73,7 +73,7 @@ public class BouncingSlipingTask : Task
     public override void OnDisable()
     {
         base.OnDisable();
-        TaskControllre.instance.allBouncingSlipingTasks.Remove(this);
+        //TaskControllre.instance.allBouncingSlipingTasks.Remove(this);
         if (storedCustomer != null)
         {
             isExit = true;
