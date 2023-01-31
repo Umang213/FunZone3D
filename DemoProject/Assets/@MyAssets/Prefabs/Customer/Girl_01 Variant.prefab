@@ -347,7 +347,8 @@ Transform:
   m_LocalPosition: {x: 3.6275014e-10, y: 0.0024492145, z: -7.078051e-11}
   m_LocalScale: {x: 1, y: 1, z: 0.9999999}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2713581931566689479}
   m_Father: {fileID: 8225004763041869536}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -779,6 +780,37 @@ Transform:
   m_Father: {fileID: 1591171940410824203}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6815551364951874361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2713581931566689479}
+  m_Layer: 0
+  m_Name: Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2713581931566689479
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6815551364951874361}
+  m_LocalRotation: {x: 0.7669225, y: -0.62467897, z: 0.08869336, w: 0.1172169}
+  m_LocalPosition: {x: -0.0020500007, y: 0.0035900082, z: 0.0027600005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8431286929910021955}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7943794740546754810
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,7 +882,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdb33a84180305c45882223b20cec39e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emojiPoint: {fileID: 0}
+  donutPoint: {fileID: 2713581931566689479}
   lHandPoint: {fileID: 8431286929910021955}
   rHandPoint: {fileID: 4328107494194884231}
   bowlingBallTask: {fileID: 0}

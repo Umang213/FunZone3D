@@ -117,10 +117,11 @@ public class BumperCarTask : Task
         transform.DOMove(startingPoint, 2).OnComplete(() =>
         {
             transform.position = startingPoint;
-            transform.rotation = Quaternion.EulerRotation(Vector3.zero);
+            transform.rotation = Quaternion.EulerRotation(0, 90, 0);
             storedCustomer.transform.position = stadingPoint.position;
             storedCustomer.transform.SetParent(null);
-            EndTask();
+            storedCustomer.SetAnimation("Drive", false);
+            CodeMonkey.Utils.FunctionTimer.Create(EndTask, 1);
         });
     }
 
@@ -128,7 +129,7 @@ public class BumperCarTask : Task
     {
         storedCustomer.SetAnimation("Drive", false);
         storedCustomer.ExitCustomer();
-        isEmpty = true;
         base.EndTask();
+        isEmpty = true;
     }
 }

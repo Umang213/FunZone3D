@@ -67,6 +67,7 @@ public class DonutCounter : MonoBehaviour
         temp.transform.DOJump(stackTransform.position, 2, 1, 0.5f).OnComplete(() =>
         {
             temp.transform.SetParent(stackTransform);
+            temp.transform.Rotate(Vector3.zero);
         });
         allDonut.Remove(temp);
         return temp;

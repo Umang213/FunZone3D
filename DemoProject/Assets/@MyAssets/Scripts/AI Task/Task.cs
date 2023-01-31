@@ -47,10 +47,12 @@ public class Task : MonoBehaviour
     {
         if (donutCounter.allDonut.Count >= 1)
         {
-            var item = donutCounter.RemoveFromLast(storedCustomer.rHandPoint);
-            yield return new WaitForSeconds(3);
+            var item = donutCounter.RemoveFromLast(storedCustomer.donutPoint);
+            storedCustomer.SetAnimation("Eat", true);
+            yield return new WaitForSeconds(5);
             donutCounter.moneyStacker.GiveMoney(storedCustomer.transform, 3);
             Destroy(item.gameObject);
+            storedCustomer.SetAnimation("Eat", false);
             storedCustomer.SetTarget(stadingPoint.position, () =>
             {
                 StartTask();
@@ -63,10 +65,12 @@ public class Task : MonoBehaviour
             yield return new WaitForSeconds(5);
             if (donutCounter.allDonut.Count >= 1)
             {
-                var item = donutCounter.RemoveFromLast(storedCustomer.rHandPoint);
-                yield return new WaitForSeconds(3);
+                var item = donutCounter.RemoveFromLast(storedCustomer.donutPoint);
+                storedCustomer.SetAnimation("Eat", true);
+                yield return new WaitForSeconds(5);
                 donutCounter.moneyStacker.GiveMoney(storedCustomer.transform, 3);
                 Destroy(item.gameObject);
+                storedCustomer.SetAnimation("Eat", false);
                 storedCustomer.SetTarget(stadingPoint.position, () =>
                 {
                     StartTask();

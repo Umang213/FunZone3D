@@ -143,6 +143,7 @@ public class Unlockable : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+
     public void LoadData()
     {
         var p = PlayerPrefs.GetFloat(id, price);

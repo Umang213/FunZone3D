@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Customer : MonoBehaviour
 {
-    //public Transform emojiPoint;
+    public Transform donutPoint;
     public Transform lHandPoint;
     public Transform rHandPoint;
     public BowlingBallTask bowlingBallTask;
@@ -13,10 +13,10 @@ public class Customer : MonoBehaviour
     public bool isCustomerReady;
     NavMeshAgent _navMeshAgent;
     Animator _anim;
-    NavMeshObstacle _navMeshObstacle;
+    //NavMeshObstacle _navMeshObstacle;
     CustomerManager _customerManager;
     Action _action;
-    Vector3 _target;
+    //Vector3 _target;
 
     public bool _isExit;
 
@@ -25,7 +25,7 @@ public class Customer : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
         _customerManager = CustomerManager.instance;
-        _navMeshObstacle = GetComponent<NavMeshObstacle>();
+        //_navMeshObstacle = GetComponent<NavMeshObstacle>();
     }
 
     private void Start()
@@ -57,34 +57,6 @@ public class Customer : MonoBehaviour
         StartCoroutine(EditUpdate());
     }
 
-    public void FreeTask()
-    {
-        var point = _customerManager.freePoint[Helper.RandomInt(0, _customerManager.freePoint.Length)].position;
-        SetTarget(point, () =>
-        {
-            _anim.SetBool("Idle", true);
-            CheckTask();
-        });
-    }
-
-    public void CheckTask()
-    {
-        StartCoroutine(CheckCustomertask());
-    }
-
-    IEnumerator CheckCustomertask()
-    {
-        yield return new WaitForSeconds(5);
-        if (Helper.RandomInt(0, 2).Equals(1))
-        {
-            ExitCustomer();
-        }
-        else
-        {
-            FreeTask();
-        }
-    }
-
     public void ExitCustomer()
     {
         //if (isCustomerReady) _navMeshObstacle.enabled = false; 
@@ -98,7 +70,7 @@ public class Customer : MonoBehaviour
     public void SetTarget(Vector3 target, Action endTask = null)
     {
         _action = endTask;
-        _target = target;
+        //_target = target;
         //if (isCustomerReady) _navMeshObstacle.enabled = false;
         _navMeshAgent.enabled = true;
         _navMeshAgent.SetDestination(target);
@@ -143,16 +115,19 @@ public class Customer : MonoBehaviour
     }
 
     #region Bowlingpart
+    //call From Animation Event
     public void PickBall()
     {
         bowlingBallTask.PickBall();
     }
 
+    //call From Animation Event
     public void ChangeBallPosition()
     {
         bowlingBallTask.ChangeBallPosition();
     }
 
+    //call From Animation Event
     public void ThrowBall()
     {
         bowlingBallTask.ThrowBall();

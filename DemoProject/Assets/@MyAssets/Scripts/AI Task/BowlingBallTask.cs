@@ -5,10 +5,12 @@ using DG.Tweening;
 
 public class BowlingBallTask : Task
 {
-    public List<GameObject> allBalls;
+    public List<Rigidbody> allBalls;
     public Transform throwPoint;
     public Transform ballStartPoint;
     public Transform ballEndPoint;
+    public List<Rigidbody> allPins;
+    public Vector3[] pinsPosition;
 
     public override void OnEnable()
     {
@@ -85,6 +87,12 @@ public class BowlingBallTask : Task
 
     public override void StartTask()
     {
+        pinsPosition = new Vector3[10];
+        for (int i = 0; i < allPins.Count; i++)
+        {
+            pinsPosition[i] = allPins[i].transform.position;
+            allPins[i].isKinematic = false;
+        }
         storedCustomer.transform.rotation = stadingPoint.rotation;
         storedCustomer.bowlingBallTask = this;
         StartCoroutine(playTask());
@@ -96,14 +104,31 @@ public class BowlingBallTask : Task
         yield return new WaitForSeconds(1);
         for (ballIndex = 0; ballIndex < allBalls.Count; ballIndex++)
         {
+            for (int i = 0; i < allPins.Count; i++)
+            {
+                allPins[i].isKinematic = false;
+            }
+            allBalls[ballIndex].isKinematic = false;
             storedCustomer.SetAnimation("Throw");
             yield return new WaitForSeconds(7);
+            SetPinsPosition();
+
             if (ballIndex.Equals(allBalls.Count - 1))
             {
                 storedCustomer.SetAnimation("HappyIdle");
                 yield return new WaitForSeconds(5);
                 EndTask();
             }
+        }
+    }
+
+    public void SetPinsPosition()
+    {
+        for (int i = 0; i < allPins.Count; i++)
+        {
+            allPins[i].isKinematic = true;
+            allPins[i].transform.position = pinsPosition[i];
+            allPins[i].transform.rotation = Quaternion.Euler(0, -90, 0);
         }
     }
 
@@ -126,6 +151,7 @@ public class BowlingBallTask : Task
             allBalls[ballIndex].transform.SetParent(transform);
         }).OnComplete(() =>
         {
+            allBalls[ballIndex].isKinematic = true;
             allBalls[ballIndex].gameObject.SetActive(false);
         });
     }
@@ -134,18 +160,18 @@ public class BowlingBallTask : Task
     {
         storedCustomer.ExitCustomer();
         StartCoroutine(SetupForNewTask());
-        isEmpty = true;
         base.EndTask();
+        isEmpty = true;
     }
 
     IEnumerator SetupForNewTask()
     {
         for (int i = 0; i < allBalls.Count; i++)
         {
+            allBalls[i].transform.position = ballStartPoint.position;
             var p = ballEndPoint.position + new Vector3(0, 0, i * 0.5f);
             allBalls[i].transform.DOMove(p, 0.5f).OnStart(() =>
             {
-                allBalls[i].transform.position = ballStartPoint.position;
                 allBalls[i].gameObject.SetActive(true);
             });
             yield return new WaitForSeconds(1f);

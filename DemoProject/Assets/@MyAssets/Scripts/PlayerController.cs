@@ -182,6 +182,7 @@ public class PlayerController : MonoBehaviour
         collectable.transform.DOJump(stackPoint.position, 2, 1, 0.5f).OnComplete(() =>
         {
             collectable.transform.SetParent(stackPoint);
+            collectable.transform.Rotate(Vector3.zero);
         });
         allStackItems.Add(collectable);
         _anim.SetLayerWeight(1, 1);
@@ -193,6 +194,7 @@ public class PlayerController : MonoBehaviour
         temp.transform.DOJump(stackTransform.position, 2, 1, 0.5f).OnComplete(() =>
         {
             temp.transform.SetParent(stackTransform);
+            temp.transform.Rotate(Vector3.zero);
         });
         allStackItems.Remove(temp);
         if (allStackItems.Count == 0)
