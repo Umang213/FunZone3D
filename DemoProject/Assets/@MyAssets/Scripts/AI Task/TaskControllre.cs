@@ -28,25 +28,10 @@ public class TaskControllre : MonoBehaviour
     IEnumerator Start()
     {
         yield return new WaitForSeconds(.5f);
-        CheckBouncingTaskUnlock();
     }
 
     public void ChangeBouncingMoneyStackPosition()
     {
         moneyStack.transform.position = moneyStackPosition.position;
-    }
-
-
-    [Header("CheckBouncingTaskUnlock")]
-    public Unlockable[] bouncingGameObject;
-    public void CheckBouncingTaskUnlock()
-    {
-        for (int i = 1; i < bouncingGameObject.Length; i++)
-        {
-            if (PlayerPrefs.GetInt(bouncingGameObject[i].id) <= 0)
-            {
-                bouncingGameObject[i - 1].unlockableObject.gameObject.SetActive(false);
-            }
-        }
     }
 }

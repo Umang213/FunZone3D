@@ -18,6 +18,10 @@ public class MoneyStacker : MonoBehaviour
 
     public UnityEvent collectAllMoney;
 
+    //List<GameObject> hideMoneyImage;
+    List<GameObject> hideMoney = new List<GameObject>();
+
+
     private void Awake()
     {
         if (OTP)
@@ -63,6 +67,8 @@ public class MoneyStacker : MonoBehaviour
         {
             if (!_isPlayer) return;
             _isPlayer = false;
+            hideMoney.ForEach(x => Destroy(x));
+            hideMoney.Clear();
             //StopCoroutine(CollectingMoney());
         }
     }
@@ -98,6 +104,7 @@ public class MoneyStacker : MonoBehaviour
     IEnumerator CollectingMoney()
     {
         if (allMoney.Count >= 1 && _isPlayer) PlayDoSpeed();
+        var camera = CameraFollow.instance.GetComponent<Camera>();
         while (allMoney.Count >= 1 && _isPlayer)
         {
             GameObject mImage;
@@ -107,30 +114,21 @@ public class MoneyStacker : MonoBehaviour
 
             money.transform.DOJump(_playerController.transform.position, 1, 1, 0.1f).OnComplete(() =>
             {
-                Destroy(money.gameObject);
+                hideMoney.Add(money.gameObject);
+                money.gameObject.SetActive(false);
+                //Destroy(money.gameObject);
 
-                /*var moneyCount = PlayerPrefs.GetInt(PlayerPrefsKey.Money, 0);
-                PlayerPrefs.SetInt(PlayerPrefsKey.Money, moneyCount + 5);
-                
-                _moneyManager.moneyScore.text = (moneyCount + 5).ToString();*/
-
-                FunctionTimer.Create(() =>
+                var position = camera.WorldToScreenPoint(_playerController.transform.position);
+                mImage = Instantiate(_moneyManager.moneyImage, position, Quaternion.identity, _moneyManager.moneyIcon.parent);
+                mImage.transform.DOMove(_moneyManager.moneyIcon.position, 0.3f).SetEase(Ease.InBack).OnComplete(() =>
                 {
-                    var position = CameraFollow.instance.GetComponent<Camera>().WorldToScreenPoint(_playerController.transform.position);
-                    mImage = Instantiate(_moneyManager.moneyImage, position, Quaternion.identity, _moneyManager.moneyIcon.parent);
-                    //mImage.transform.SetParent(_moneyManager.moneyIcon.parent);
-                    mImage.transform.DOMove(_moneyManager.moneyIcon.position, 0.3f).SetEase(Ease.InBack).OnComplete(() =>
-                    {
-                        var moneyCount = PlayerPrefs.GetInt(PlayerPrefsKey.Money, 0);
-                        PlayerPrefs.SetInt(PlayerPrefsKey.Money, moneyCount + 5);
-                        _moneyManager.moneyScore.text = (moneyCount + 5).ToString();
-                        Destroy(mImage.gameObject);
-                    });
-                    /*mImage.transform.DOJump(_moneyManager.moneyIcon.position, 2, 1, 0.3f).SetEase(Ease.InBack).OnComplete(() =>
-                    {
-                        Destroy(mImage.gameObject);
-                    });*/
-                }, 0.3f);
+                    var moneyCount = PlayerPrefs.GetInt(PlayerPrefsKey.Money, 0);
+                    PlayerPrefs.SetInt(PlayerPrefsKey.Money, moneyCount + 5);
+                    _moneyManager.moneyScore.text = (moneyCount + 5).ToString();
+                    //Destroy(mImage.gameObject);
+                    hideMoney.Add(mImage);
+                    mImage.SetActive(false);
+                });
             });
             yield return new WaitForSeconds(unlockSpeed);
 
@@ -140,8 +138,6 @@ public class MoneyStacker : MonoBehaviour
                 collectAllMoney = null;
             }
         }
-        //yield return new WaitForSeconds(unlockSpeed);
-        //StartCoroutine(CollectingMoney());
     }
     float unlockSpeed = 0.2f;
     public void PlayDoSpeed()

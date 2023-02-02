@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UI;
 
 public class HrController : MonoBehaviour
 {
@@ -47,6 +44,7 @@ public class HrController : MonoBehaviour
         upgradePanel.transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.InBack).OnComplete(() => { upgradePanel.SetActive(false); });
     }
 
+    //call From animation event
     public void AddWorker()
     {
         var money = PlayerPrefs.GetInt(PlayerPrefsKey.Money, 0);
@@ -66,10 +64,12 @@ public class HrController : MonoBehaviour
                 worker.transform.rotation = worker.SitingPoint.rotation;
                 worker.SetAnimation("Sit", true);
                 CustomerManager.instance.ticketController._isWorker = true;
+                CustomerManager.instance.ticketController.AggryPermission();
             });
         }
     }
 
+    //call From animation event
     public void AddSpeed()
     {
         var money = PlayerPrefs.GetInt(PlayerPrefsKey.Money, 0);
@@ -87,9 +87,6 @@ public class HrController : MonoBehaviour
 
     public void LoadData()
     {
-        //CodeMonkey.Utils.FunctionTimer();
-
-
         var count = PlayerPrefs.GetInt("Worker", 0);
         if (count.Equals(1))
         {

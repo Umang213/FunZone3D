@@ -126,7 +126,6 @@ Library: lib_burst_generated
 --compilation-defines=MOBILE_INPUT
 --compilation-defines=ODIN_INSPECTOR
 --compilation-defines=ODIN_INSPECTOR_3
---compilation-defines=VIRTUE_MODEL_PROCESSOR
 --compilation-defines=gameanalytics_admob_enabled
 --compilation-defines=TIMELINE_FRAMEACCURATE
 --compilation-defines=CSHARP_7_OR_LATER

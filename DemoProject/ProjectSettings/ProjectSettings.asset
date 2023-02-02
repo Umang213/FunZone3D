@@ -274,7 +274,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 0}
+      m_Icon: {fileID: 2800000, guid: e7cd23a2eb0b0864183d3db6138fa60c, type: 3}
       m_Width: 128
       m_Height: 128
       m_Kind: 0
@@ -811,7 +811,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: MOREMOUNTAINS_NICEVIBRATIONS;MOBILE_INPUT;ODIN_INSPECTOR;ODIN_INSPECTOR_3;VIRTUE_MODEL_PROCESSOR;gameanalytics_admob_enabled
+    Android: MOREMOUNTAINS_NICEVIBRATIONS;MOBILE_INPUT;ODIN_INSPECTOR;ODIN_INSPECTOR_3;gameanalytics_admob_enabled
     Standalone: MOBILE_INPUT;MOREMOUNTAINS_NICEVIBRATIONS;ODIN_INSPECTOR;ODIN_INSPECTOR_3
     iPhone: MOBILE_INPUT;VIRTUE_MODEL_PROCESSOR;gameanalytics_admob_enabled
   additionalCompilerArguments: {}

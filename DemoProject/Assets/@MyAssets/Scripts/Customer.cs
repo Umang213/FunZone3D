@@ -13,10 +13,8 @@ public class Customer : MonoBehaviour
     public bool isCustomerReady;
     NavMeshAgent _navMeshAgent;
     Animator _anim;
-    //NavMeshObstacle _navMeshObstacle;
     CustomerManager _customerManager;
     Action _action;
-    //Vector3 _target;
 
     public bool _isExit;
 
@@ -25,7 +23,6 @@ public class Customer : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _anim = GetComponent<Animator>();
         _customerManager = CustomerManager.instance;
-        //_navMeshObstacle = GetComponent<NavMeshObstacle>();
     }
 
     private void Start()

@@ -6,6 +6,7 @@ using DG.Tweening;
 public class TutorialController : MonoBehaviour
 {
     public static TutorialController instance;
+    public LineRenderer lineRenderer;
     public GameObject collectCash;
     public GameObject buildBowlingBall;
     public GameObject buildCounter;
@@ -14,6 +15,7 @@ public class TutorialController : MonoBehaviour
 
     public GameObject standToBuy;
     public List<Unlockable> allUnlockables;
+    PlayerController playerController;
 
     private void Awake()
     {
@@ -29,7 +31,35 @@ public class TutorialController : MonoBehaviour
     private void Start()
     {
         ShowStandToBuy();
+        playerController = PlayerController.instance;
+        lineRenderer.material.DOOffset(new Vector2(-1, 0), 1f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Incremental);
+        standToBuy.transform.DOMoveY(6, 0.5f).From(5).SetEase(Ease.InSine).SetLoops(-1, LoopType.Yoyo);
     }
+    private void Update()
+    {
+        var count = PlayerPrefs.GetInt(PlayerPrefsKey.UnlockCount, 0);
+        if (allUnlockables.Count >= (count + 1))
+        {
+            if (PlayerPrefs.GetInt(PlayerPrefsKey.Money, 0) >= allUnlockables[count].price)
+            {
+                //standToBuy.transform.DOMoveY(6, 0.5f).From(5).SetEase(Ease.InSine).SetLoops(-1, LoopType.Yoyo);
+                standToBuy.transform.DOMoveX(allUnlockables[count].transform.position.x, 0.1f);
+                standToBuy.transform.DOMoveZ(allUnlockables[count].transform.position.z, 0.1f);
+                standToBuy.SetActive(true);
+                lineRenderer.gameObject.SetActive(true);
+                lineRenderer.positionCount = 2;
+                lineRenderer.SetPosition(0, playerController.transform.position.With(y: 0.1f));
+                lineRenderer.SetPosition(1, allUnlockables[count].transform.position.With(y: 0.1f));
+            }
+            else
+            {
+                lineRenderer.gameObject.SetActive(false);
+                standToBuy.SetActive(false);
+            }
+        }
+
+    }
+
     public void ShowCollectCash()
     {
         var count = PlayerPrefs.GetInt("StoredMoney", 30);
@@ -68,14 +98,17 @@ public class TutorialController : MonoBehaviour
 
     public void ShowStandToBuy()
     {
-        for (int i = 0; i < allUnlockables.Count; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (allUnlockables[i].price > 0)
             {
-                var pos = allUnlockables[i].transform.position;
-                pos.y += 5;
-                standToBuy.transform.position = pos;
-                standToBuy.transform.DOMoveY((pos.y + 1), 0.5f).SetEase(Ease.InSine).SetLoops(-1, LoopType.Yoyo);
+                //var pos = allUnlockables[i].transform.position;
+                //pos.y += 5;
+                //standToBuy.transform.position = pos;
+                //standToBuy.transform.position = allUnlockables[i].transform.position;
+                standToBuy.transform.DOMoveX(allUnlockables[i].transform.position.x, 0.1f);
+                standToBuy.transform.DOMoveZ(allUnlockables[i].transform.position.z, 0.1f);
+                //standToBuy.transform.DOMoveY(6, 0.5f).From(5).SetEase(Ease.InSine).SetLoops(-1, LoopType.Yoyo);
                 return;
             }
         }

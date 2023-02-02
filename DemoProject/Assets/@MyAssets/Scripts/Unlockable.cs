@@ -107,6 +107,7 @@ public class Unlockable : MonoBehaviour
                 DOTween.To(() => fillImage.fillAmount, x => fillImage.fillAmount = x, 1 - (price / fillPrice), 0.1f);
                 if (price.Equals(0))
                 {
+                    PlayerPrefs.SetInt(PlayerPrefsKey.UnlockCount, (PlayerPrefs.GetInt(PlayerPrefsKey.UnlockCount, 0) + 1));
                     MoneyManager.instance.moneySpending.gameObject.SetActive(false);
                     Unlock();
                     unlockFinishTutorial?.Invoke();
