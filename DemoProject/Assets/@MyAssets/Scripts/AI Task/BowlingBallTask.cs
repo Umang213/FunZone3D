@@ -101,6 +101,7 @@ public class BowlingBallTask : Task
     int ballIndex;
     IEnumerator playTask()
     {
+        storedCustomer.StopAgentForTask();
         yield return new WaitForSeconds(1);
         for (ballIndex = 0; ballIndex < allBalls.Count; ballIndex++)
         {

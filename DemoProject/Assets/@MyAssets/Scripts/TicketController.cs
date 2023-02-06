@@ -103,8 +103,8 @@ public class TicketController : MonoBehaviour
                     _verify = false;
                     CodeMonkey.Utils.FunctionTimer.Create(() =>
                     {
-                        CustomerManager.instance.ArrangePosition();
                         CustomerManager.instance.instanceSpawing();
+                        CustomerManager.instance.ArrangePosition();
                     }, 2);
                 });
             }

@@ -98,6 +98,7 @@ public class BumperCarTask : Task
 
     IEnumerator PlayTask()
     {
+        storedCustomer.StopAgent();
         storedCustomer.transform.position = carSitingPoint.position;
         storedCustomer.transform.rotation = carSitingPoint.rotation;
         storedCustomer.transform.parent = carSitingPoint.parent;
@@ -109,20 +110,24 @@ public class BumperCarTask : Task
         for (int i = 0; i < 7; i++)
         {
             carAgent.SetDestination(TaskControllre.instance.carPoint[Helper.RandomInt(0, TaskControllre.instance.carPoint.Length)].position);
-            yield return new WaitForSeconds(Helper.RandomInt(3, 5));
+            yield return new WaitForSeconds(3.5f);
+            if (i == 6)
+            {
+                carAgent.SetDestination(startingPoint);
+                yield return new WaitForSeconds(3);
+                carAgent.enabled = false;
+                transform.DOMove(startingPoint, 2).OnComplete(() =>
+                {
+                    transform.position = startingPoint;
+                    transform.rotation = Quaternion.EulerRotation(0, 90, 0);
+                    storedCustomer.transform.position = stadingPoint.position;
+                    storedCustomer.transform.SetParent(null);
+                    storedCustomer.SetAnimation("Drive", false);
+                    EndTask();
+                    //CodeMonkey.Utils.FunctionTimer.Create(EndTask, 1);
+                });
+            }
         }
-        carAgent.SetDestination(startingPoint);
-        yield return new WaitForSeconds(3);
-        carAgent.enabled = false;
-        transform.DOMove(startingPoint, 2).OnComplete(() =>
-        {
-            transform.position = startingPoint;
-            transform.rotation = Quaternion.EulerRotation(0, 90, 0);
-            storedCustomer.transform.position = stadingPoint.position;
-            storedCustomer.transform.SetParent(null);
-            storedCustomer.SetAnimation("Drive", false);
-            CodeMonkey.Utils.FunctionTimer.Create(EndTask, 1);
-        });
     }
 
     public override void EndTask()

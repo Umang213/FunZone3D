@@ -15,6 +15,8 @@ public class Customer : MonoBehaviour
     Animator _anim;
     CustomerManager _customerManager;
     Action _action;
+    Vector3 _target;
+    bool _isStop;
 
     public bool _isExit;
 
@@ -33,6 +35,13 @@ public class Customer : MonoBehaviour
     IEnumerator EditUpdate()
     {
         yield return new WaitForSeconds(1);
+        if (_navMeshAgent.enabled == false && _isStop == true)
+        {
+            if ((_target - transform.position).magnitude > 0)
+            {
+                SetTarget(_target, _action);
+            }
+        }
         if (_navMeshAgent.enabled == true)
         {
             if (_navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance)
@@ -45,7 +54,8 @@ public class Customer : MonoBehaviour
                 }
                 else
                 {
-                    StopAgent();
+                    //StopAgent();
+                    StopAgentForTask();
                     _action?.Invoke();
                     _action = null;
                 }
@@ -57,17 +67,18 @@ public class Customer : MonoBehaviour
     public void ExitCustomer()
     {
         //if (isCustomerReady) _navMeshObstacle.enabled = false; 
+        _target = CustomerManager.instance.customerInstantiatePoint.position;
         _navMeshAgent.enabled = true;
-        _navMeshAgent.SetDestination(_customerManager.customerInstantiatePoint.position);
+        _navMeshAgent.SetDestination(CustomerManager.instance.customerInstantiatePoint.position);
         _anim.SetBool("Idle", false);
         _anim.SetBool("Walk", true);
-        CodeMonkey.Utils.FunctionTimer.Create(() => { _isExit = true; }, 10);
+        CodeMonkey.Utils.FunctionTimer.Create(() => { _isExit = true; }, 1);
     }
 
     public void SetTarget(Vector3 target, Action endTask = null)
     {
         _action = endTask;
-        //_target = target;
+        _target = target;
         //if (isCustomerReady) _navMeshObstacle.enabled = false;
         _navMeshAgent.enabled = true;
         _navMeshAgent.SetDestination(target);
@@ -77,6 +88,15 @@ public class Customer : MonoBehaviour
 
     public void StopAgent()
     {
+        _isStop = false;
+        _navMeshAgent.enabled = false;
+        //if (isCustomerReady) _navMeshObstacle.enabled = true;
+        _anim.SetBool("Walk", false);
+        _anim.SetBool("Idle", false);
+    }
+    public void StopAgentForTask()
+    {
+        _isStop = true;
         _navMeshAgent.enabled = false;
         //if (isCustomerReady) _navMeshObstacle.enabled = true;
         _anim.SetBool("Walk", false);
