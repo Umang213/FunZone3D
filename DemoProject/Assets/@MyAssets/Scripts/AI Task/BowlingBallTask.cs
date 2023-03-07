@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class BowlingBallTask : Task
+public class BowlingBallTask : TaskParents
 {
     public List<Rigidbody> allBalls;
     public Transform throwPoint;

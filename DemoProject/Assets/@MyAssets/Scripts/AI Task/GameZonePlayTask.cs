@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class GameZonePlayTask : Task
+public class GameZonePlayTask : TaskParents
 {
     //public bool isEmpty;
     //public Customer storedCustomer;

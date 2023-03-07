@@ -4,7 +4,7 @@ using UnityEngine;
 using CodeMonkey.Utils;
 using DG.Tweening;
 
-public class BouncingTask : Task
+public class BouncingTask : TaskParents
 {
     //public bool isEmpty;
     //public Transform stadingPoint;

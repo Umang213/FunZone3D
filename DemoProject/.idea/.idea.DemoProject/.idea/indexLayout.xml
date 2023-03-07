@@ -1,41 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ContentModelUserStore">
+  <component name="UserContentModel">
     <attachedFolders />
-    <explicitIncludes>
-      <Path>Library/PackageCache/com.unity.2d.sprite@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.ext.nunit@1.0.6</Path>
-      <Path>Library/PackageCache/com.unity.ide.rider@3.0.14</Path>
-      <Path>Library/PackageCache/com.unity.ide.visualstudio@2.0.15</Path>
-      <Path>Library/PackageCache/com.unity.modules.androidjni@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.animation@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.assetbundle@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.audio@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.imageconversion@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.imgui@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.jsonserialize@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.particlesystem@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.physics@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.screencapture@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.ui@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.umbra@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.unitywebrequest@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.modules.unitywebrequestassetbundle@1.0.0</Path>
-      <Path>Library/PackageCache/com.unity.test-framework@1.1.31</Path>
-      <Path>Library/PackageCache/com.unity.textmeshpro@3.0.6</Path>
-      <Path>Library/PackageCache/com.unity.ugui@1.0.0</Path>
-      <Path>Packages</Path>
-      <Path>ProjectSettings</Path>
-    </explicitIncludes>
-    <explicitExcludes>
-      <Path>.idea</Path>
-      <Path>.vs</Path>
-      <Path>APK</Path>
-      <Path>Library</Path>
-      <Path>Logs</Path>
-      <Path>Temp</Path>
-      <Path>UserSettings</Path>
-      <Path>obj</Path>
-    </explicitExcludes>
+    <explicitIncludes />
+    <explicitExcludes />
   </component>
 </project>

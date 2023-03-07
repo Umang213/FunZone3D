@@ -7,7 +7,7 @@ public class TaskControllre : MonoBehaviour
     public Transform[] carPoint;
     public static TaskControllre instance;
 
-    public List<Task> allTasks;
+    public List<TaskParents> allTasks;
     public List<DonutCounter> allDonutCounters;
 
     public GameObject moneyStack;

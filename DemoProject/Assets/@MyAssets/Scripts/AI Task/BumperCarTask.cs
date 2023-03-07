@@ -1,11 +1,10 @@
-using EasyButtons;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using DG.Tweening;
 
-public class BumperCarTask : Task
+public class BumperCarTask : TaskParents
 {
     NavMeshAgent carAgent;
     Vector3 startingPoint;

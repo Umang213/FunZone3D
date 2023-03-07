@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using CodeMonkey.Utils;
 
-public class BouncingSlipingTask : Task
+public class BouncingSlipingTask : TaskParents
 {
     //public bool isEmpty;
     //public Transform stadingPoint;

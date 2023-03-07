@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class GameZoneVideoTask : Task
+public class GameZoneVideoTask : TaskParents
 {
     //public bool isEmpty;
     public bool isPlayMachine;

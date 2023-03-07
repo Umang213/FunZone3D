@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 
-public class BouncingLevel4Task : Task
+public class BouncingLevel4Task : TaskParents
 {
     [Header("Sliping")]
     public Transform slipingPoint1;
